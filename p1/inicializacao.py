@@ -20,15 +20,17 @@ m = len(itens) # Retorna o numero de itens que "itens" contem
 B = np.zeros((m, m)) 
 
 # Cria um vetor de custo m x 1 cheio de '1's
-# O custo de cada padrão homogêneo é 1
+# O custo de usar qualquer padrão é 1 barra de Estoque
 cB = np.ones(m) 
+# ex: Qual o preço de executar a Receita 0 ([1, 0, 0]) uma vez?
+# = 1 barra de tamanho L
 
 # Preenche a diagonal da matriz B
 for i in range (m): 
     l_i = itens[i]["comprimento"] # Comprimento do item i
     d_i = itens[i]["demanda"] # Demanda, numero total que precisamos produzir de i
 
-    # Calculo de quantos itens i cabem em L
+    # Calculo de quantos itens i cabem em L, quantidade física máxima
     # Equacao (6) do PDF
 
     num_itens_no_padrao = math.floor(L / l_i) # math.florr arredonda para o inteiro abaixo

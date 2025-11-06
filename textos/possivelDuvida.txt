@@ -1,0 +1,52 @@
+formulacao_base_problema_corte.txt
+---------------------------------------------------------------------
+
+### A Sua Dúvida (Confirmada)
+
+Sim, o "número de objetos" está diretamente relacionado ao número de barras de tamanho L que você vai precisar para atender toda a demanda.
+
+* Um "padrão de corte" (como `[1, 6, 0]`) é um plano de como cortar UMA barra de tamanho L.
+* A variável `x_j` (por exemplo, `x_5 = 3`) diz "use o padrão de corte 'j' 3 vezes".
+* Isso significa pegar 3 barras de tamanho L do estoque e cortá-las usando esse mesmo plano.
+* O objetivo de "minimizar a soma de x_j" é, portanto, minimizar o número total de barras de tamanho L que você tira do estoque.
+
+---
+
+### Formulação Base do Problema
+
+O problema de corte de estoque é formulado como um Problema de Otimização Linear Inteiro. A forma padrão (genérica) é descrita no PDF como:
+
+Minimizar:
+f(x) = c^T * x   
+
+Sujeito a:
+Ax = d          
+x >= 0 e inteiro 
+
+
+### Tradução dos Símbolos para o Nosso Problema
+
+**1. O que é 'x' (O Vetor de Decisão):**
+
+* `x` é um vetor onde cada posição `x_j` representa o número de vezes que um padrão de corte `j` é usado.
+* Esta é a **solução** que estamos tentando encontrar.
+* **Exemplo:** Se `x_3 = 5` significa "usar o padrão de corte 3 cinco vezes".
+
+**2. O que é 'A' (A Matriz de Padrões):**
+
+* `A` é uma matriz teórica gigantesca onde cada *coluna* `j` é um *padrão de corte* possível.
+* **Exemplo:** Uma coluna de `A` (um padrão) poderia ser `[1, 6, 0]^T`, significando "cortar 1 item do tipo 0, 6 itens do tipo 1, e 0 itens do tipo 2" de uma barra de tamanho L.
+* **O Grande Problema:** Esta matriz `A` é muito grande para ser escrita (milhões de colunas). É por isso que o algoritmo "Gera Colunas" (padrões) conforme a necessidade, em vez de conhecer `A` inteira.
+
+**3. O que é 'd' (O Vetor de Demanda):**
+
+* `d` é o vetor que lista a quantidade necessária de cada item[cite: 85].
+* A restrição `Ax = d` garante que a soma de todos os itens produzidos (por todos os padrões usados) seja **exatamente igual** à demanda necessária.
+* **Exemplo:** `d = [4, 8, 7]^T` (precisamos de 4 itens do tipo 0, 8 do tipo 1, 7 do tipo 2).
+
+**4. O que é 'c' (O Vetor de Custo):**
+
+* `c` é um vetor que define o "custo" de usar cada padrão `j`.
+* No nosso problema, o objetivo é **minimizar o número total de objetos cortados**.
+* O "custo" de usar *qualquer* padrão `j` é **1** (pois consome 1 barra de tamanho L).
+* Portanto, `c` é um vetor de '1's, e a função `c^T * x` se torna `sum(1 * x_j)`, que é o mesmo que `sum(x_j)`.

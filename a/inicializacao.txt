@@ -1,6 +1,5 @@
 O problema que estamos implementando, seguindo o PDF, tem um objetivo muito específico e simples:
 Minimizar o número total de objetos (bobinas/barras) de estoque a serem cortados.
-Usando o padrão de corte homogêneo
 Vide equacao (2)
 
 Variaveis Principais do Problema

@@ -1,6 +1,10 @@
 import numpy as np
 import math
 
+# O que esse arquivo faz:
+# O passo de "Inicialização"  dos algoritmos 1 e 3. 
+# Preparando todas as variáveis necessárias para iniciar a primeira iteração do método Simplex.
+
 # Dados de Entrada
 L = 194 # Comprimento do objeto em estoque
 itens = [

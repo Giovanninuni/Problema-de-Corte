@@ -21,8 +21,8 @@ cB = np.ones(m)
 
 # Preenche a diagonal da matriz B
 for i in range (m): 
-    l_i = itens[i]["comprimento"]
-    d_i = itens[i]["demanda"]
+    l_i = itens[i]["comprimento"] # Comprimento do item i
+    d_i = itens[i]["demanda"] # Demanda, numero total que precisamos produzir de i
 
     # Calculo de quantos itens i cabem em L
     # Equacao (6) do PDF
@@ -31,5 +31,24 @@ for i in range (m):
     # ex: itens[0] -> num_itens_no_padrao = 1
     # itens[1] -> num_itens_no_padrao = 14
 
-    valor_diagonal = min(num_itens_no_padrao, d_i)
+    # Para inserir na matriz, vemos qual valor é menor entre o numero de itens e a demanda
+    # evitando assim produzir mais do que a demanda
+    # Ou seja, produz no máximo a demanda total
+    valor_diagonal = min(num_itens_no_padrao, d_i) # min() retorna o minimo valor entre os dois
+    # ex: itens[1] -> min(14, 8) = 8
+
+    # Inserimos o valor
+    B[i][i] = valor_diagonal 
+# Fim do loop for
+
+print("--- Matriz Basica Inicial B---")
+print(B)
+
+print("--- Vetor de Custo ---")
+print(cB)
+
+# Vetor de Demanda d (d na equação Ax = d)
+d = np.array([item["demanda"] for item in itens])
+print("--- Vetor de Demanda ---")
+print(d)
     

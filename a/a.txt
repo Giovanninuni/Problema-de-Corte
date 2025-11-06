@@ -1,0 +1,66 @@
+O problema que estamos implementando, seguindo o PDF, tem um objetivo muito específico e simples:
+Minimizar o número total de objetos (bobinas/barras) de estoque a serem cortados.
+Usando o padrão de corte homogêneo
+Vide equacao (2)
+
+Variaveis Principais do Problema
+
+Variável L:
+    Valor no Exemplo = 194
+    O que é no PDF: O comprimento da Barra em Estoque
+    Símbolo no PDF: L
+    Onde Aparece: Na definição do problema, na restrição do Problema da Mochila, e no cálculo do padrão homogêneo
+
+Variável m:
+    Valor no Exemplo = 3
+    O que é no PDF: O número de tipos de itens menores que precisam ser produzidos
+    Símbolo no PDF: m
+    Onde Aparece: Define as dimensões do problema, como no número de linhas da matriz A (abaixo da Equacao (3)) e o numero de restrições
+
+Variaveis Contidas em itens
+
+Variavel itens[i]["comprimento"]:
+    Valor no Exemplo = 108, 13, 90
+        O que é no PDF: O comprimento do item do tipo i
+        Símbolo no PDF: l_i (li)
+        Onde Aparece: Usado para definir os padrões de corte e na Equação (6)
+
+Variavel itens[i]["demanda"]:
+    Valor no Exemplo = 4, 8, 7
+        O que é no PDF: A quantidade(demanda) necessária do item do tipo i
+        Símbolo no PDF: d_i (di)
+        Onde Aparece: Compõeo o vetor de demanda d e é usado na Equação (6)
+
+Matrizes e Vetores do Algoritmo
+
+Variavel d:
+    Valor no Exemplo = [4, 8, 7]
+    O que é no PDF: O vetor de demanda (o "lado direito da equação").
+    Símbolo no PDF: d
+    Onde aparece: Na formulação principal Ax = d e no passo do Simplex Bx = d
+
+Variavel B:
+    Valor no Exemplo = [[1, 0, 0], [0, 8, 0], [0, 0, 2]]
+    O que é no PDF: A Matriz Básica Inicial. Ela é um subconjunto m x m da matriz A e é composta por colunas (padrões de corte) linearmente independentes
+    Símbolo no PDF: B
+    Onde Aparece: É a matriz B usada para resolver Bx = d e B^T.(lambda) = c_B (cB) (Encontrados no PDF no Algoritmo 1)
+
+Variavel cB:
+    Valor no Exemplo = [1, 1, 1]
+    O que é no PDF: O vetor de custo associado às colunas (padrões) que estão na matriz B
+    Símbolo no PDF: c_B (cB)
+    Onde Aparece: Como nosso objetivo é minimizar o número total de objetos, o custo c é um vetor de '1's. É usado para resolver B^T.(lambda) = c_B
+
+Variáveis de Cálculo (Intermediárias)
+    
+Variavel num_itens_no_padrao:
+    Cálculo: math.floor(L/ l_i)
+    O que é no PDF: O número de itens i que cabem em um padrão homogêneo (que só produz o item i)
+    Símbolo no PDF: [L / l_i], vide Equação (6)
+    Onde Aparece: Na definição de padrão homogêneo e na Equacao (6)
+
+Variavel valor_diagonal:
+    Cálculo: min(num_itens_no_padrao, d_i)
+    O que é no PDF: O valor exato b_{ii} (o elemento i, i da matriz B) para a base inicial, que garante que o padrão não exceda a demanda
+    Símbolo no PDF: b_{ii} ou (bii)
+    Onde aparece: É o resultado da Equação (6)

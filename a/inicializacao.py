@@ -55,4 +55,5 @@ print(cB)
 d = np.array([item["demanda"] for item in itens])
 print("--- Vetor de Demanda ---")
 print(d)
-    
+
+# Edicao para teste

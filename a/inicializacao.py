@@ -57,3 +57,4 @@ print("--- Vetor de Demanda ---")
 print(d)
 
 # Edicao para teste
+#jj

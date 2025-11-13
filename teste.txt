@@ -1,0 +1,4 @@
+feito no computador de mileS
+
+git config --global user.email "milenafranca1306@gmail.com"
+  git config --global user.name "Milena França"
